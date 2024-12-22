@@ -1,9 +1,9 @@
 import React from 'react';
 
-function NotesButton() {
+function NotesButton({ id, onArchive, onDelete}) {
   return (
     <div className='btnContainer'>
-      <button className='btnArsip'>Arsip</button>
+      <button className='btnArchive'>Archive</button>
       <button className='btnDelete'>Delete</button>
     </div>
   );

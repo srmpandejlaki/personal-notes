@@ -1,8 +1,8 @@
 import React from 'react';
 
-function FormButton() {
+function FormButton({ id, submit }) {
   return (
-    <button className='btnForm' type='submit'>Save</button>
+    <button className='btnForm' type='submit' onClick={() => submit(id)}>Save</button>
   );
 }
 

@@ -4,7 +4,7 @@ import NotesButton from './notes-button';
 
 function NotesItem({ title, body }) {
   return (
-    <div>
+    <div className='notesItem'>
       <NotesBody title={title} body={body}></NotesBody>
       <NotesButton></NotesButton>
     </div>

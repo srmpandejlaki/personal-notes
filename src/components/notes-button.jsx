@@ -2,7 +2,7 @@ import React from 'react';
 
 function NotesButton() {
   return (
-    <div>
+    <div className='btnContainer'>
       <button className='btnArsip'>Arsip</button>
       <button className='btnDelete'>Delete</button>
     </div>

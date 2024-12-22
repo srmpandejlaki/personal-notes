@@ -89,37 +89,36 @@ input::placeholder, textarea::placeholder {
   cursor: pointer;
 }
 
-.notes-list {
+/* NOTES LIST */
+.notesList {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: minmax(min-content, max-content);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 16px;
   margin-bottom: 48px;
 }
 
-.notes-list__empty-message {
+.notesList__empty-message {
   text-align: center;
   color: #aaa;
 }
 
-.note-item {
+/* NOTES ITEM */
+.notesItem {
   border: 1px solid #aaa;
   border-radius: 4px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  gap: 0.5rem;
 }
 
-.note-item__content {
-  padding: 12px;
-  flex: 1;
-}
-
-.note-item__title {
+.titleNotes {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   margin-bottom: 4px;
+  font-size: 1.2rem;
 }
 
 .note-item__date {
@@ -128,61 +127,45 @@ input::placeholder, textarea::placeholder {
   color: #aaa;
 }
 
-.note-item__body {
+.bodyNotes {
   font-size: 14px;
 }
 
-.note-item__action {
+/* NOTES BUTTON */
+.btnContainer {
   display: flex;
+  gap: 0.5rem;
 }
 
-.note-item__delete-button,.note-item__archive-button {
-  display: block;
+.btnDelete,.btnArsip {
   width: 100%;
   background-color: transparent;
-  border: 0;
-  border-top: 1px solid #aaa;
+  border: 1px solid #aaa;
   padding: 8px 0;
   font-family: 'Inter', sans-serif;
   font-weight: bold;
   cursor: pointer;
 }
 
-.note-item__delete-button {
+.btnDelete {
   border-right: 1px solid #aaa;
   color: #ff5f52;
 }
 
-.note-item__archive-button {
+.btnArsip {
   color: #fff263;
 }
 
-.note-item__archive-button:hover {
+.btnArsip:hover {
   color: #c49000;
 }
 
-.note-item__delete-button:hover {
+.btnDelete:hover {
   color: #b00020;
 }
 
-@media only screen and (min-width: 500px) {
-  .notes-list {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 @media only screen and (min-width: 800px) {
-  .notes-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
   .note-search input {
     min-width: 400px;
-  }
-}
-
-@media only screen and (min-width: 800px) {
-  .notes-list {
-    grid-template-columns: repeat(4, 1fr);
   }
 }

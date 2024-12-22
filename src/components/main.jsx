@@ -49,10 +49,7 @@ class Main extends React.Component {
   render() {
     return (
       <div className='main'>
-        <div className='formContainer'>
-          <h1>Create a New Note</h1>
-          <FormContainer addNotes={this.onAddNotesHandler} />
-        </div>
+        <FormContainer addNotes={this.onAddNotesHandler} />
         <div className='notesContainer'>
           <h1>Personal Notes</h1>
           <NotesList notes={this.state.notes} onArchive={this.onArchiveHandler} onDelete={this.onDeleteHandler} />

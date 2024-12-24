@@ -14,17 +14,12 @@ body {
   display: flex;
 }
 
-.notesContainer {
-  flex: 3;
-  padding: 24px;
-  max-height: 100vh;
-  overflow: scroll;
-}
+.notesContainer, 
+.archiveContainer, 
 .formContainer {
   flex: 2;
   padding: 24px;
 }
-
 
 input, textarea {
   display: block;
@@ -111,12 +106,6 @@ h1 {
   font-size: 1.2rem;
 }
 
-.note-item__date {
-  font-size: 12px;
-  margin-bottom: 8px;
-  color: #aaa;
-}
-
 .bodyNotes {
   font-size: 14px;
 }
@@ -128,7 +117,8 @@ h1 {
 }
 
 .btnDelete,
-.btnArchive {
+.btnArchive,
+.btnUnarchive {
   width: 100%;
   background-color: transparent;
   border: 1px solid #aaa;
@@ -147,12 +137,24 @@ h1 {
   color: #fff263;
 }
 
+.btnUnarchive {
+  color: #63ff63;
+}
+
 .btnArchive:hover {
   color: #c49000;
 }
 
+.btnUnarchive:hover {
+  color: #17c400;
+}
+
 .btnDelete:hover {
   color: #b00020;
+}
+
+.searchBar {
+  padding: 24px;
 }
 
 @media only screen and (max-width: 600px) {

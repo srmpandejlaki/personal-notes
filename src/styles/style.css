@@ -39,6 +39,7 @@ input::placeholder, textarea::placeholder {
 }
 
 h1 {
+  text-align: center;
   margin: 8px 0;
   flex: 1;
   color: white;
@@ -75,16 +76,17 @@ h1 {
 }
 
 /* NOTES LIST */
-.notesList {
+.notesList, .archiveList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 16px;
   margin-bottom: 48px;
 }
 
-.notesList__empty-message {
+.notes-empty-message {
   text-align: center;
   color: #aaa;
+  margin-top: 1rem;
 }
 
 /* NOTES ITEM */

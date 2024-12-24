@@ -1,17 +1,24 @@
 import React from 'react';
-import NotesItem from './notes-item';
+import ArchiveItem from './archive-item';
 
-function ArchiveList({ notes, onUnarchive, onDelete}) {
+function ArchiveList({ notes, onUnarchive, onDelete }) {
+  const archivedNotes = notes.filter((note) => note.isArchived);
+
   return (
     <div className='archiveList'>
-      {notes.map((note) => (
-        note.isArchived &&
-        <NotesItem key={note.id}
-        id={note.id}
-        {...note}
-        onUnarchive={onUnarchive}
-        onDelete={onDelete} />
-      ))}
+      {archivedNotes.length > 0 ? (
+        archivedNotes.map((note) => (
+          <ArchiveItem
+            key={note.id}
+            id={note.id}
+            {...note}
+            onUnarchive={onUnarchive}
+            onDelete={onDelete}
+          />
+        ))
+      ) : (
+        <p className='notes-empty-message'>Tidak ada notes yang diarsipkan</p>
+      )}
     </div>
   );
 }

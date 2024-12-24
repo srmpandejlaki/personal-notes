@@ -10,13 +10,15 @@ class Main extends React.Component {
     super(props);
     this.state = {
       notes: getInitialData(),
+      searchKeyword: '',
     };
 
     this.onAddNotesHandler = this.onAddNotesHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
     this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
-  }  
+    this.onSearchHandler = this.onSearchHandler.bind(this);
+  }
 
   onAddNotesHandler({ title, body }) {
     this.setState((prevState) => {
@@ -60,27 +62,37 @@ class Main extends React.Component {
     this.setState({ notes });
   }
 
+  onSearchHandler(keyword) {
+    this.setState({ searchKeyword: keyword });
+  }
+
   render() {
+    const { notes, searchKeyword } = this.state;
+
+    const filteredNotes = notes.filter((note) =>
+      note.title.toLowerCase().includes(searchKeyword.toLowerCase())
+    );
+
     return (
       <div className='main'>
         <div>
-          <FormContainer addNotes={this.onAddNotesHandler} />
-          <SearchBar />
+          <FormContainer addNotes={this.onAddNotesHandler}/>
+          <SearchBar onSearch={this.onSearchHandler} />
         </div>
         <div className='notesContainer'>
           <h1>Personal Notes</h1>
-          <NotesList 
-            notes={this.state.notes.filter((note) => !note.archived)} 
-            onArchive={this.onArchiveHandler} 
-            onDelete={this.onDeleteHandler} 
+          <NotesList
+            notes={filteredNotes.filter((note) => !note.archived)}
+            onArchive={this.onArchiveHandler}
+            onDelete={this.onDeleteHandler}
           />
         </div>
         <div className='archiveContainer'>
           <h1>Archive Notes</h1>
-          <ArchiveList 
-            notes={this.state.notes.filter((note) => note.archived)} 
-            onUnarchive={this.onUnarchiveHandler} 
-            onDelete={this.onDeleteHandler} 
+          <ArchiveList
+            notes={filteredNotes.filter((note) => note.archived)}
+            onUnarchive={this.onUnarchiveHandler}
+            onDelete={this.onDeleteHandler}
           />
         </div>
       </div>

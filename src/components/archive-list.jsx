@@ -2,7 +2,7 @@ import React from 'react';
 import ArchiveItem from './archive-item';
 
 function ArchiveList({ notes, onUnarchive, onDelete }) {
-  const archivedNotes = notes.filter((note) => note.isArchived);
+  const archivedNotes = notes.filter((note) => note.archived);
 
   return (
     <div className='archiveList'>

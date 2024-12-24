@@ -1,5 +1,4 @@
 import React from 'react';
-import TitleLimit from './title-limit';
 
 class FormContainer extends React.Component {
   constructor(props) {
@@ -7,11 +6,13 @@ class FormContainer extends React.Component {
     this.state = {
       title: '',
       body: '',
+      titleLimit: 50,
     };
 
     this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this);
     this.onBodyChangeEventHandler = this.onBodyChangeEventHandler.bind(this);
     this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
+    this.onTitleLimitHandler = this.onTitleLimitHandler.bind(this);
   }
 
   onTitleChangeEventHandler(event) {
@@ -35,11 +36,23 @@ class FormContainer extends React.Component {
    this.props.addNotes(this.state);
  }
 
+  onTitleLimitHandler(event) {
+    event.preventDefault();
+    const { title, body } = this.state;
+
+    if (this.props.addNotes) {
+      this.props.addNotes({ title, body, titleLimit });
+    }
+
+    this.setState({ title: '', body: '' });
+  }
+
  render() {
-   return (
+  const { titleLimit, title, body } = this.state;
+  return (
     <div className='formContainer'>
       <h1>Let's Create Your Note</h1>
-      <TitleLimit></TitleLimit>
+      <p className="character-limit">Title must be less than {titleLimit - title.length} characters</p>
       <form className='formInput' onSubmit={this.onSubmitEventHandler}>
         <input type='text' placeholder='Title Notes' value={this.state.title} onChange={this.onTitleChangeEventHandler} />
         <textarea placeholder='Description' value={this.state.body} onChange={this.onBodyChangeEventHandler} />

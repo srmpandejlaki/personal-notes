@@ -3,6 +3,7 @@ import NotesItem from './notes-item';
 
 function NotesList({ notes, onArchive, onDelete }) {
   const listNotes = notes.filter((note) => !note.archived);
+  console.log(notes);
 
   return (
     <div className='notesList'>

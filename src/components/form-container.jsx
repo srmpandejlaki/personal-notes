@@ -12,55 +12,61 @@ class FormContainer extends React.Component {
     this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this);
     this.onBodyChangeEventHandler = this.onBodyChangeEventHandler.bind(this);
     this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
-    this.onTitleLimitHandler = this.onTitleLimitHandler.bind(this);
   }
 
   onTitleChangeEventHandler(event) {
-   this.setState(() => {
-     return {
-       title: event.target.value,
-     }
-   });
- }
- 
- onBodyChangeEventHandler(event) {
-   this.setState(() => {
-     return {
-       body: event.target.value,
-     }
-   });
- }
- 
- onSubmitEventHandler(event) {
-   event.preventDefault();
-   this.props.addNotes(this.state);
- }
+    const { titleLimit } = this.state;
+    const inputTitle = event.target.value;
 
-  onTitleLimitHandler(event) {
-    event.preventDefault();
-    const { title, body } = this.state;
-
-    if (this.props.addNotes) {
-      this.props.addNotes({ title, body, titleLimit });
+    // Batasi input sesuai `titleLimit`
+    if (inputTitle.length <= titleLimit) {
+      this.setState({ title: inputTitle });
     }
-
-    this.setState({ title: '', body: '' });
   }
 
- render() {
-  const { titleLimit, title, body } = this.state;
-  return (
-    <div className='formContainer'>
-      <h1>Let's Create Your Note</h1>
-      <p className="character-limit">Title must be less than {titleLimit - title.length} characters</p>
-      <form className='formInput' onSubmit={this.onSubmitEventHandler}>
-        <input type='text' placeholder='Title Notes' value={this.state.title} onChange={this.onTitleChangeEventHandler} />
-        <textarea placeholder='Description' value={this.state.body} onChange={this.onBodyChangeEventHandler} />
-        <button className='btnForm' type='submit' >Save</button>
-      </form>
-    </div>
-   );
- }
+  onBodyChangeEventHandler(event) {
+    this.setState({ body: event.target.value });
+  }
+
+  onSubmitEventHandler(event) {
+    event.preventDefault();
+
+    const { title, body } = this.state;
+
+    if (title.trim().length === 0 || body.trim().length === 0) {
+      alert('Title and description cannot be empty!');
+      return;
+    }
+
+    this.props.addNotes({ title, body });
+    this.setState({ title: '', body: '' }); // Reset form
+  }
+
+  render() {
+    const { title, body, titleLimit } = this.state;
+    const remainingChars = titleLimit - title.length;
+
+    return (
+      <div className='formContainer'>
+        <h1>Let's Create Your Note</h1>
+        <p className="character-limit">Title must be less than {remainingChars} characters</p>
+        <form className='formInput' onSubmit={this.onSubmitEventHandler}>
+          <input
+            type='text'
+            placeholder='Title Notes'
+            value={title}
+            onChange={this.onTitleChangeEventHandler}
+          />
+          <textarea
+            placeholder='Description'
+            value={body}
+            onChange={this.onBodyChangeEventHandler}
+          />
+          <button className='btnForm' type='submit'>Save</button>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default FormContainer;

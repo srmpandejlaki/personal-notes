@@ -26,7 +26,7 @@ class Main extends React.Component {
         notes: [
           ...prevState.notes,
           {
-            id: Date(),
+            id: +new Date(),
             title,
             body,
             archived: false,

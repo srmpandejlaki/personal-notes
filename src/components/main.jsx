@@ -26,11 +26,11 @@ class Main extends React.Component {
         notes: [
           ...prevState.notes,
           {
-            id: new Date().getTime(),
+            id: Date(),
             title,
             body,
             archived: false,
-            createdAt: createdAt || new Date().toISOString(),
+            createdAt: new Date().toISOString(),
           },
         ],
       };

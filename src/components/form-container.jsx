@@ -49,7 +49,7 @@ class FormContainer extends React.Component {
     return (
       <div className='formContainer'>
         <h1>Let's Create Your Note</h1>
-        <p className="character-limit">Title must be less than {remainingChars} characters</p>
+        <p className="character-limit">remaining characters available: {remainingChars}</p>
         <form className='formInput' onSubmit={this.onSubmitEventHandler}>
           <input
             type='text'
